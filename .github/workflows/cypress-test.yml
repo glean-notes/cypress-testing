@@ -1,0 +1,39 @@
+name: 'E2E Tests'
+on:
+  workflow_dispatch:
+  push:
+jobs:
+  run-e2e-tests:
+    name: 'E2E Tests'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    container:
+      image: cypress/included:10.3.0
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+      - name: Yarn Install
+        run: cd src/e2e && yarn install
+      - name: Lint
+        run: cd src/e2e && yarn lint
+      - name: Compile
+        run: cd src/e2e && yarn tsc
+      - name: Test
+        env:
+          TEST_HELPER_USR:  ${{ secrets.TEST_HELPER_USR }}
+          TEST_HELPER_PSW:  ${{ secrets.TEST_HELPER_PSW }}
+        run: |
+          cd src/e2e
+          bash ../run-glean-cypress-tests.sh
+      - name: Archive E2E videos
+        if: failure() || cancelled()
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress_videos
+          path: frontend/testing/e2e/**/*.mp4
+      - name: Archive Chrome debug logs
+        if: failure() || cancelled()
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress_debug
+          path: frontend/testing/e2e/**/*.mp4

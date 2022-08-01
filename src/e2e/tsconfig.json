@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "types": ["cypress", "cypress-wait-until"],
+    "lib": ["es6", "dom"],
+    "downlevelIteration": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    // force tsc to error if you import something from outside the project
+    // https://github.com/microsoft/TypeScript/issues/9858
+    "rootDir": ".",
+    "outDir": "./out",
+    "allowJs": true
+  },
+  "include": ["**/*.ts"]
+}
