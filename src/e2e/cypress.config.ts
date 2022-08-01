@@ -6,6 +6,7 @@ export default defineConfig({
   videosFolder: 'videos',
   fixturesFolder: 'fixtures',
   defaultCommandTimeout: 20000,
+  video: true,
   videoUploadOnPasses: false,
   chromeWebSecurity: false,
   numTestsKeptInMemory: 0,
