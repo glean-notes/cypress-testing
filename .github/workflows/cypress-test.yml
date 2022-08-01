@@ -30,10 +30,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: cypress_videos
-          path: frontend/testing/e2e/**/*.mp4
+          path: src/e2e/**/*.mp4
       - name: Archive Chrome debug logs
         if: failure() || cancelled()
         uses: actions/upload-artifact@v2
         with:
-          name: cypress_debug
-          path: frontend/testing/e2e/**/*.mp4
+          name: chrome_debug
+          path: chrome_debug.log
