@@ -1,5 +1,0 @@
-export const getStartTimerButton = () => cy.getByDataTest('FocusTimerModal-startTimer')
-export const getCancelButton = () => cy.getByDataTest('FocusTimerModal-cancel')
-export const clickStartTimerButton = () => getStartTimerButton().click()
-export const clickCancelButton = () => getCancelButton().click()
-export const pickDuration = (value: string) => cy.getByDataTest(`duration-${value}`).click()
