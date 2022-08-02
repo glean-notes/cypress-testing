@@ -18,9 +18,7 @@ beforeEach(() => {
 
     ApplyCypressAudioMocks(win)
   })
-  cy.visit('/')
-  window.localStorage.setItem('suppress-appcues', 'true')
-  window.localStorage.setItem('suppress-service-worker-reload', 'true')
+  cy.visitAdmin('/')
   indexedDB.deleteDatabase(`glean-${testUserIds.baldrick}`)
   indexedDB.deleteDatabase(`glean-${testUserIds.flashheart}`)
   cy.logout()
