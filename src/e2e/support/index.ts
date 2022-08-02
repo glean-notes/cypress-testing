@@ -11,9 +11,7 @@ export const testUserIds = {
 beforeEach(() => {
   cy.on('window:load', (win) => {
     win.addEventListener('unhandledrejection', (event) => {
-      if (!(win as any)._gleanIgnoreRejections) {
-        throw new Error('Unhandled promise rejection: ' + event.reason)
-      }
+      throw new Error('Unhandled promise rejection: ' + event.reason)
     })
 
     ApplyCypressAudioMocks(win)
@@ -24,17 +22,6 @@ beforeEach(() => {
   cy.logout()
   cy.clearCookies()
 })
-
-export const ignoringRejections = {
-  it: (title: string, fn: () => void) =>
-    it(title, () => {
-      cy.on('window:before:load', (win) => {
-        ;(win as any)._gleanIgnoreRejections = true
-      })
-
-      fn()
-    }),
-}
 
 if (Cypress.env('LOG_FAILURES_TO_KIBANA') !== 'false') {
   setUpFailureLogging()

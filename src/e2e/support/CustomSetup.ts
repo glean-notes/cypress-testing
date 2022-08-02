@@ -42,52 +42,6 @@ export const withOrganisationsAndUsers = (
   })
 }
 
-type EventAndUser = Cypress.User & { eventId: string }
-
-export const withUserAndEvent = (name: string, testBlock: (user: EventAndUser) => void) =>
-  it(name, () => {
-    cy.setupUser({
-      includedEvent: { eventType: 'WITH_NOTES' },
-    }).then((userAndEvent) => testBlock(userAndEvent as EventAndUser))
-  })
-
-export const withUserAndAudioOnlyEvent = (
-  name: string,
-  testBlock: (user: EventAndUser) => void,
-  config: Cypress.TestConfigOverrides = {}
-) =>
-  it(name, config, () => {
-    cy.setupUser({
-      includedEvent: { eventType: 'AUDIO_ONLY' },
-    }).then((userAndEvent) => testBlock(userAndEvent as EventAndUser))
-  })
-
-export const withUserAndCustomEvent = (
-  name: string,
-  {
-    schemaVersion,
-    eventType = 'WITH_NOTES',
-  }: {
-    schemaVersion?: number
-    eventType?: 'WITH_NOTES' | 'AUDIO_ONLY' | 'WITH_SLIDES' | 'WITH_IMAGES' | 'WITH_LARGE_IMAGE'
-  } = {},
-  testBlock: (user: EventAndUser) => void
-) =>
-  it(name, () => {
-    cy.setupUser({ includedEvent: { eventType, schemaVersion } }).then((userAndEvent) =>
-      testBlock(userAndEvent as EventAndUser)
-    )
-  })
-
-type EventAndCollectionAndUser = EventAndUser & { collectionId: string }
-
-export const withUserAndEventInCollection = (name: string, testBlock: (user: EventAndCollectionAndUser) => void) =>
-  it(name, () => {
-    cy.setupUser({
-      includedEvent: { eventType: 'WITH_NOTES', inCollection: true },
-    }).then((userAndEventAndCollection) => testBlock(userAndEventAndCollection as EventAndCollectionAndUser))
-  })
-
 export const withLimitedAccessAdmin = (name: string, testBlock: TestBlock) =>
   it(name, () => {
     cy.createOrganisation({ adminAccessType: 'LIMITED', subscriptionType: 'DISTRIBUTOR' }).then(({ id }) => {
@@ -109,6 +63,3 @@ export const withAccountManger = (name: string, testBlock: (user: Cypress.Accoun
       testBlock(accountManagerUser)
     })
   })
-
-export const withUnicodeUser = (name: string, testBlock: (user: Cypress.User) => void) =>
-  it(name, () => cy.setupUser({ unicodeEmailAddress: true }).then(testBlock))
