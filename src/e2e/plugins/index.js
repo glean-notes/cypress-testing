@@ -22,12 +22,6 @@ export function setupNodeEvents(on, config) {
     launchOptions.args.push('--enable-logging')
     launchOptions.args.push('--v=1')
 
-    if (config.env.USE_BROWSER_EXTENSION) {
-      const extensionDir = path.resolve(config.env.BROWSER_EXTENSION_PATH)
-      launchOptions.args.push(`--load-extension=${extensionDir}`)
-      launchOptions.args.push('--auto-select-desktop-capture-source=e2e')
-    }
-
     // Turn off safebrowsing for chrome/edge via prefs, see https://docs.cypress.io/api/plugins/browser-launch-api#Changing-browser-preferences
     /* eslint-disable @typescript-eslint/naming-convention */
     const originalPrefs = launchOptions.preferences.default

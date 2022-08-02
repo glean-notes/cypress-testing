@@ -3,7 +3,6 @@
 import RequestOptions = Cypress.RequestOptions
 import Chainable = Cypress.Chainable
 import RetrieveEmailRequest = Cypress.RetrieveEmailRequest
-import VisitOptions = Cypress.VisitOptions
 import Organisation = Cypress.Organisation
 
 declare namespace Cypress {
@@ -147,34 +146,6 @@ const commonHeadersWithAuth = {
     pass: Cypress.env('TEST_HELPER_PSW'),
   },
 }
-
-// chrome blocks the user warning we normally show when we try to leave the page with pending changes
-// (https://www.chromestatus.com/feature/5082396709879808)
-// overwriting 'visit' and 'reload' to manually write pending changes
-Cypress.Commands.overwrite<'visit'>(
-  'visit',
-  (
-    originalVisit: (options: Partial<VisitOptions> & { url: string }) => any,
-    options: Partial<VisitOptions> & { url: string }
-  ) => runUpdatePersistencePoller().then(() => originalVisit(options))
-)
-
-Cypress.Commands.overwrite<'reload'>('reload', (originalReload: (forceReload: boolean) => any, options: boolean) =>
-  runUpdatePersistencePoller().then(() => originalReload(options))
-)
-
-const runUpdatePersistencePoller = () =>
-  cy.window().then(async (theWindow) => {
-    const window = theWindow as any
-    const poll = window['runUpdatePersistencePoller']
-    if (poll) {
-      Cypress.log({
-        name: 'updatePersistence',
-        message: ['Running the update persistence job'],
-      })
-      await poll()
-    }
-  })
 
 Cypress.Commands.add('loginAsNewAdmin', () => {
   return cy.setupUser({ role: 'ORGANISATION_ADMIN' }).then((user) => {
