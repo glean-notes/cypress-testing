@@ -318,7 +318,7 @@ Cypress.Commands.add('logout', () => {
   })
   return cy.request({
     method: 'POST',
-    url: '/api/logout',
+    url: '/admin/api/logout',
     ...commonHeaders,
   })
 })
