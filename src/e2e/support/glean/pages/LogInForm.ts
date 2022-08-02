@@ -1,5 +1,3 @@
-export const verifyIsShown = () => cy.contains('Log In')
-
 export const getField = (name: string) => cy.get(`[name="${name}"]`)
 
 export const emailField = () => getField('email')
@@ -19,7 +17,3 @@ export const login = (username?: string, password?: string) => {
 
   cy.get('input[type="submit"]').click()
 }
-
-export const clickForgotPasswordLink = () => cy.get('.logged-out-app-links__forgot-password').click()
-
-export const clickNeedHelp = () => cy.getByDataTest('needHelp').click()
