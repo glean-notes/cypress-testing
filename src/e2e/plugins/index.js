@@ -1,6 +1,5 @@
 /* eslint-disable no-restricted-syntax,no-console,@typescript-eslint/no-var-requires */
 
-const path = require('path')
 const wp = require('@cypress/webpack-preprocessor')
 const fs = require('fs')
 
@@ -12,11 +11,7 @@ export function setupNodeEvents(on, config) {
   on('file:preprocessor', wp(options))
 
   on('before:browser:launch', (browser, launchOptions) => {
-    const sampleFile = path.resolve('samples/speech.wav')
     launchOptions.args.push('--no-sandbox')
-    launchOptions.args.push('--use-fake-ui-for-media-stream')
-    launchOptions.args.push('--use-fake-device-for-media-stream')
-    launchOptions.args.push(`--use-file-for-fake-audio-capture=${sampleFile}`)
     launchOptions.args.push('--disable-site-isolation-trials')
     launchOptions.args.push('--no-experiments')
     launchOptions.args.push('--enable-logging')

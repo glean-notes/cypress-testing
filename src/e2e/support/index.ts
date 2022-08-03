@@ -1,6 +1,5 @@
 import './commands'
 import 'cypress-plugin-tab'
-import { ApplyCypressAudioMocks } from './Mocks'
 import { setUpFailureLogging } from './failureLogging'
 
 export const testUserIds = {
@@ -13,8 +12,6 @@ beforeEach(() => {
     win.addEventListener('unhandledrejection', (event) => {
       throw new Error('Unhandled promise rejection: ' + event.reason)
     })
-
-    ApplyCypressAudioMocks(win)
   })
   cy.visitAdmin('/')
   indexedDB.deleteDatabase(`glean-${testUserIds.baldrick}`)
