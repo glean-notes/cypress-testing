@@ -20,7 +20,7 @@ function loginAndVerifyUsersPageIsShown(email: string, password: string) {
   UsersPage.verifyIsShown()
 }
 
-for (let step = 0; step < 3; step++) {
+for (let step = 0; step < 30; step++) {
   describe(`Log In ${step}`, () => {
     CustomSetup.withOrganisationAdmin('should let a user log in with correct credentials', ({ email, password }) => {
       loginAndVerifyUsersPageIsShown(email, password)
