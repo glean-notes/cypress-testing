@@ -6,7 +6,7 @@ jobs:
   run-e2e-tests:
     name: 'E2E Tests'
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     container:
       image: cypress/included:10.3.0
     steps:
