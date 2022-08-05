@@ -1,27 +1,16 @@
 import * as LogInForm from 'support/admin/pages/LogInForm'
-import * as UsersPage from 'support/admin/pages/UsersPage'
-import * as CustomSetup from 'support/CustomSetup'
 
-function loginAndVerifyUsersPageIsShown(email: string, password: string) {
-  cy.visitAdmin('/users')
-  LogInForm.verifyIsShown()
-
-  LogInForm.inputEmail(email)
-  LogInForm.inputPassword(password)
-  LogInForm.clickLogIn()
-
-  cy.url().should('includes', '/users')
-  UsersPage.verifyIsShown()
-
-  // Check still logged in after refresh:
-  cy.reload()
-  UsersPage.verifyIsShown()
-}
-
-for (let step = 1; step <= 200; step++) {
-  describe(`Log In ${step}`, () => {
-    CustomSetup.withOrganisationAdmin('should let a user log in with correct credentials', ({ email, password }) => {
-      loginAndVerifyUsersPageIsShown(email, password)
+describe(`Log In Megatest`, () => {
+  for (let step = 1; step <= 200; step++) {
+    it(`Log In ${step}`, () => {
+      cy.visitAdmin('/')
+      LogInForm.verifyIsShown()
+      
+      LogInForm.inputEmail("some.user@example.com")
+      LogInForm.inputPassword('wrongpassword')
+      LogInForm.clickLogIn()
+  
+      LogInForm.errorMessageIs('Your login details are incorrect, please try again.')
     })
-  })
-}
+  }
+})
