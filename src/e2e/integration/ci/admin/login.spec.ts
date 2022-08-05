@@ -1,8 +1,6 @@
 import * as LogInForm from 'support/admin/pages/LogInForm'
 import * as UsersPage from 'support/admin/pages/UsersPage'
-import * as BlockedPage from 'support/admin/pages/BlockedPage'
 import * as CustomSetup from 'support/CustomSetup'
-import { todayMinus } from 'support/common/dateHelpers'
 
 function loginAndVerifyUsersPageIsShown(email: string, password: string) {
   cy.visitAdmin('/users')
