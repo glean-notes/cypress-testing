@@ -14,4 +14,3 @@ describe(`Log In Megatest`, () => {
     })
   }
 })
-ˆ
