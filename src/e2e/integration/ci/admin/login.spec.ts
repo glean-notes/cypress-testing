@@ -10,7 +10,7 @@ describe(`Log In Megatest`, () => {
       LogInForm.inputPassword('wrongpassword')
       LogInForm.clickLogIn()
   
-      LogInForm.errorMessageIs('Your login details are incorrect, please try again.')
+      LogInForm.errorMessageIs('There was a problem logging in, please try again later.')
     })
   }
 })
