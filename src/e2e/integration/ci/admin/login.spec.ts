@@ -1,7 +1,7 @@
 import * as LogInForm from 'support/admin/pages/LogInForm'
 
 describe(`Log In Megatest`, () => {
-  for (let step = 1; step <= 300; step++) {
+  for (let step = 1; step <= 1; step++) {
     it(`Log In ${step}`, () => {
       cy.visitAdmin('/')
       LogInForm.verifyIsShown()
