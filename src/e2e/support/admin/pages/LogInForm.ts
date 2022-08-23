@@ -10,12 +10,4 @@ export const inputPassword = (password: string) => getPasswordField().type(passw
 
 export const clickLogIn = () => cy.getByDataTest('login-submit').click()
 
-export const clickForgotPasswordLink = () => cy.getByDataTest('forgot-password').click()
-
 export const errorMessageIs = (errorMessage: string) => cy.getByDataTest('login-error').contains(errorMessage)
-
-export const logIn = (email: string, password: string) => {
-  inputEmail(email)
-  inputPassword(password)
-  clickLogIn()
-}
