@@ -1,5 +1,4 @@
 .idea
 *.iml
 
-src/e2e/cypress.config.local.ts
 src/e2e/node_modules
