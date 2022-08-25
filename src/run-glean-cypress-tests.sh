@@ -2,6 +2,8 @@
 
 set -eux
 
+( while true; do echo TIME $(date +"%Y-%m-%dT%H:%M:%S"); ps aux; sleep 5; done 2>&1 > processes.log ) &
+
 LOG_FAILURES_TO_KIBANA="true"
 
 export CHROME_LOG_FILE="chrome_debug.log"

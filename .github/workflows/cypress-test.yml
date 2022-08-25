@@ -37,3 +37,9 @@ jobs:
         with:
           name: chrome_debug
           path: chrome_debug.log
+      - name: Archive processes log
+        if: failure() || cancelled()
+        uses: actions/upload-artifact@v2
+        with:
+          name: processes_log
+          path: src/e2e/processes.log
