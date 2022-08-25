@@ -2,7 +2,7 @@
 
 set -eux
 
-( while true; do echo TIME $(date +"%Y-%m-%dT%H:%M:%S"); ps aux; sleep 5; done 2>&1 > processes.log ) &
+( set +x; while true; do echo TIME $(date +"%Y-%m-%dT%H:%M:%S"); ps aux; sleep 10; done 2>&1 > processes.log ) &
 
 LOG_FAILURES_TO_KIBANA="true"
 
